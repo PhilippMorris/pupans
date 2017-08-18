@@ -69,4 +69,4 @@
     minute: 0
     hour: 0
     day: 1
-    job: sudo /bin/rm -f /var/log/cronjobs/*
+    job: /bin/rm -f /var/log/cronjobs/*
