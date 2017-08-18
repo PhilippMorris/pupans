@@ -22,7 +22,7 @@
 - name: add cron job Check for and apply reduced MTU
   cron:
     name: Check for and apply reduced MTU
-    hour: *
+    hour: "*"
     job: /usr/local/bin/random-delay.sh 3600; /opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1
   when: enable
 - name: remove mtu-discover files
