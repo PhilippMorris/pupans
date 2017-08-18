@@ -6,9 +6,9 @@
 #    - basic
 #    - sysstation
 #    - pip
-    - grub
-#    - plymouth
-#    - mtu-discover
+#    - grub
+    - plymouth
+    - mtu-discover
 #    - iptables
 #    - ntp
 #    - dhcp
