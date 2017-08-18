@@ -1,4 +1,10 @@
 ---
+- apt_repository:
+    repo: 'ppa:fkrull/deadsnakes-python2.7'
+- name: Update repositories cache and install python 2.7.12
+  apt:
+    name: python2.7
+    update_cache: yes
 - name: install python pip
   easy_install:
     name: pip
@@ -8,6 +14,7 @@
     name: "{{ item }}"
     state: latest
   with_items:
+    - urllib3[secure]
     - cheetah
     - configparser
     - distribute
