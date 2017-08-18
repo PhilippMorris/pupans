@@ -1,3 +1,6 @@
+---
+- name: install python pip
+  apt: python-pip
 - name: install pip packages
   pip:
     name: "{{ item }}"
