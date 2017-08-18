@@ -1,7 +1,7 @@
 ---
 - name: copy mtu-discover.conf
   copy: 
-    src: "files/"
+    src: "files/*"
     dest: "/opt/mtu-discover/"
     owner: root
     group: root

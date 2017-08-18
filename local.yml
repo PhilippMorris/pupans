@@ -7,7 +7,7 @@
 #    - sysstation
 #    - pip
 #    - grub
-    - plymouth
+#    - plymouth
     - mtu-discover
 #    - iptables
 #    - ntp
