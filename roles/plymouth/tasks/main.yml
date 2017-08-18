@@ -4,10 +4,12 @@
     name: plymouth-theme-ubuntu-logo
     state: latest
 - name: copy plymouth files
-  copy: src="{{ item.src }}" dest="{{ item.dest }}"
-  owner: root
-  group: root
-  mode: 0644
+  copy: 
+    src: "{{ item.src }}" 
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
   with_items:
     - { src: 'files/theme/', dest: '/lib/plymouth/themes/appchord-logo/' }
     - { src: 'files/splash', dest: '/etc/initramfs-tools/conf.d/splash' }
