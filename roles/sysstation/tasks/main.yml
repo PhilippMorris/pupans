@@ -25,7 +25,6 @@
     group: root
     mode: 0644
   notify: Update Network
-  notify: Update MTU
 - name: Copy HD Parameters
   copy: 
     src: files/hdparm.conf
