@@ -1,4 +1,8 @@
 ---
+- name: install packages required for the script
+  apt: 
+    name: bc
+    state: latest
 - name: copy mtu-discover.conf
   copy: 
     src: "files/"
