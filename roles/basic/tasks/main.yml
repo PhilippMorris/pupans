@@ -70,7 +70,9 @@
     state: directory
     mode: 0755
 - name: copy init and ssh files
-  copy: src="{{ item.src }}" dest="{{ item.dest }}"
+  copy: 
+    src: "{{ item.src }}" 
+    dest: "{{ item.dest }}"
     mode: 0644
   with_items:
     - { src: 'files/init/', dest: '/etc/init/' }
