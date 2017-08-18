@@ -1,0 +1,10 @@
+[Unit]
+Description=Bridge
+After=network.target
+ 
+[Service]
+WorkingDirectory=/var/www/bridge
+ExecStart=/usr/bin/python bridge.py
+ 
+[Install]
+WantedBy=multi-user.target

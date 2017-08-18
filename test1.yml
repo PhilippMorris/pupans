@@ -1,0 +1,18 @@
+---
+- hosts: test1
+  tasks:
+  - name: Check if nginx is running
+    command: systemctl status nginx
+    ignore_errors: yes
+    changed_when: false
+    register: service_nginx_status
+
+  - name: Report status of nginx and trying to restart
+    fail:
+      command: service nginx start
+      msg: |
+        Service nginx is not running.
+#        Output of `systemctl status nginx`:
+#        {{ service_nginx_status.stdout }}
+#        {{ service_nginx_status.stderr }}      
+    when: service_nginx_status | failed

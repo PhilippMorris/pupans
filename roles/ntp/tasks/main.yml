@@ -1,0 +1,14 @@
+---
+- name: install ntp
+  apt: 
+    name: ntp 
+    state: latest
+- name: copy ntp.conf
+  copy: 
+    src: files/ntp.conf 
+    dest: /etc/ntp.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - restart ntp

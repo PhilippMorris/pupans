@@ -1,0 +1,24 @@
+---
+- name: Ensure folders are created
+  file:
+  with_items:
+    - /home/acadmin/data_0
+    - /home/acadmin/data_1
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+- name: Mount drive data_0
+  mount: 
+    path: /home/acadmin/data_0
+    src: /dev/data_0/data_0
+    fstype: ext4
+    state: mounted
+    opts: rw,errors=remount-ro
+- name: Mount drive data_1
+  mount: 
+    path: /home/acadmin/data_1
+    src: /dev/data_1/data_1
+    fstype: ext4
+    state: mounted
+    opts: rw,errors=remount-ro

@@ -1,0 +1,7 @@
+---
+- name: check tftpd-hpa running
+  service: name=tftpd-hpa state=started enabled=yes
+- name: SymlinkWinPe
+  shell: "/opt/stationcontent/symlinkcontent.py --targetdir /usr/share/pxe/winpe --contentfilter winpe* >> /var/log/cronjobs/symlinkcontent_winpe.log 2>&1"
+- name: SymlinkClonezilla
+  shell: "/opt/stationcontent/symlinkcontent.py --targetdir /usr/share/pxe/clonezilla --contentfilter clonezilla* >> /var/log/cronjobs/symlinkcontent_clonezilla"

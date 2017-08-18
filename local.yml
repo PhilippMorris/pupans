@@ -1,0 +1,11 @@
+---
+#sudo ansible-pull --accept-host-key -o -U https://github.com/PhilippMorris/Ansible.git
+- hosts: 127.0.0.1
+  connection: local
+  roles:
+    - basic
+    - dhcp
+    - adb
+    - tftp
+    - ntp
+    - mounts

@@ -1,0 +1,3 @@
+.complete
+.package.json
+.version

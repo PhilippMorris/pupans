@@ -1,0 +1,19 @@
+---
+- name: install plymouth
+  apt: 
+    name: plymouth-theme-ubuntu-logo
+    state: latest
+- name: copy plymouth files
+  copy: src={{ item.src }} dest={{ item.dest }}
+  owner: root
+  group: root
+  mode: 0644
+  with_items:
+    - { src: 'files/theme/', dest: '/lib/plymouth/themes/appchord-logo/' }
+    - { src: 'files/splash', dest: '/etc/initramfs-tools/conf.d/splash' }
+    - { src: 'files/plymouth-logbackup.conf', dest: '/etc/init/plymouth-logbackup.conf' }
+    - { src: 'files/plymouth-hostname.conf', dest: '/etc/init/plymouth-hostname.conf' }
+- name: Install theme
+  command: '/usr/sbin/update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/appchord-logo/appchord-logo.plymouth 1000'
+- name: Update Initramfs
+  command: /usr/sbin/update-initramfs -u

@@ -1,0 +1,56 @@
+---
+- name: Update GRUB_HIDDEN_TIMEOUT
+  lineinfile:
+    path: /etc/default/grub
+    line: 'GRUB_HIDDEN_TIMEOUT='
+  notify: update grub
+- name: Update GRUB_HIDDEN_TIMEOUT_QUIET
+  lineinfile:
+    path: /etc/default/grub
+    line: 'GRUB_HIDDEN_TIMEOUT_QUIET='
+  notify: update grub
+- name: Update GRUB_TIMEOUT
+  lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: '.*GRUB_TIMEOUT=.*'
+    line: 'GRUB_TIMEOUT=2'
+  notify: update grub
+- name: Update GRUB_RECORDFAIL_TIMEOUT
+  lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: '.*GRUB_RECORDFAIL_TIMEOUT=.*'
+    line: 'GRUB_RECORDFAIL_TIMEOUT=2'
+  notify: update grub
+- name: Update GRUB_DISABLE_OS_PROBER
+  lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: '.*GRUB_DISABLE_OS_PROBER=.*'
+    line: 'GRUB_DISABLE_OS_PROBER=true'
+  notify: update grub
+- name: Update GRUB_DEFAULT
+  lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: '.*GRUB_DEFAULT=.*'
+    line: 'GRUB_DEFAULT=saved'
+  notify: update grub
+- name: Update GRUB_CMDLINE_LINUX_DEFAULT
+  lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: '.*GRUB_CMDLINE_LINUX_DEFAULT=.*'
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+  notify: update grub
+- name: Make grub default EFI boot manager
+  command: /bin/mkdir -p /boot/efi/EFI/BOOT; /bin/cp /boot/efi/EFI/ubuntu/grubx64.efi /boot/efi/EFI/BOOT/bootx64.efi
+- name: Copy grub config for kiosk
+  copy: 
+    src: files/40_custom
+    dest: /etc/grub.d/40_custom
+    owner: root
+    group: root
+    mode: 0755
+  notify: update grub

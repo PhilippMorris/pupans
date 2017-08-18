@@ -1,0 +1,4 @@
+---
+- name: Restart SSH tunnel
+  service: 
+    command: /opt/sshtunnel/ensuretunnel.sh 4

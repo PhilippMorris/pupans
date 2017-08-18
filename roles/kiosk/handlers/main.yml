@@ -1,0 +1,5 @@
+---
+- name: Restart X
+  command: /usr/bin/pkill X
+- name: Kiosk Pull
+  command: /opt/kiosk/kiosk_pull.sh {{branch}}

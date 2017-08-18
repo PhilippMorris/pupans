@@ -1,0 +1,147 @@
+---
+- apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 630239CC130E1A7FD81A27B140976EAF437D05B5
+    state: present
+- shell: ls -1 /etc/apt/sources.list.d/
+  register: contents
+- file: path=/etc/apt/sources.list.d/{{ item }} state=absent
+  with_items: contents.stdout_lines
+  when: item not in managed_files
+- shell: ls -1 /etc/apt/preferences.d/
+  register: contents1
+- file: path=/etc/apt/preferences.d/{{ item }} state=absent
+  with_items: contents1.stdout_lines
+  when: item not in managed_files
+- name: remove preferences
+  file:
+    path: /etc/apt/preferences
+    state: absent
+- name: remove sources
+  file:
+    path: /etc/apt/sources.list
+    state: absent
+- apt_repository:
+    repo: {{ item }}
+    state: present
+  with_files:
+   - deb http://us.archive.ubuntu.com/ubuntu/ precise main restricted universe multiverse
+   - deb http://us.archive.ubuntu.com/ubuntu/ precise-security main restricted universe multiverse
+   - deb http://us.archive.ubuntu.com/ubuntu/ precise-updates main restricted universe multiverse
+   - deb http://us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse
+- name: Install basic software
+  apt: name={{ item }} state=latest
+  with_items:
+    - acpid
+    - acl
+    - apt-transport-https
+    - curl
+    - gdisk
+    - git
+    - htop
+    - hfsprogs
+    - iotop
+    - jnettop
+    - lldpd
+    - nmap
+    - python-samba
+    - python-dev
+    - ssh
+    - screen
+    - tofrodos
+    - unattended-upgrades
+    - vim
+    - vnstat
+#    - 'ansible'
+- name: Add groups 
+  group: 
+    name: {{ item }}
+  with_items:
+  - kiosk
+  - acadmin
+  - usbaccess
+  - sshlogin
+- name: Add user kiosk
+  user: 
+    name: kiosk
+    group: kiosk
+    password: $6$rounds=656000$HVXxKXYOOZ7lAsgW$NBu3.rOIjv.89lhWrctaVF/0ut6RbXX5Syy/5IO2G6vw.yHx26iJsazJSIozYJDEJikwX5LVqvegZrqH1VGzK0
+- name: Add user acadmin
+  user: 
+    name: acadmin
+    groups: sudo,acadmin
+    password: $6$rounds=656000$HVXxKXYOOZ7lAsgW$NBu3.rOIjv.89lhWrctaVF/0ut6RbXX5Syy/5IO2G6vw.yHx26iJsazJSIozYJDEJikwX5LVqvegZrqH1VGzK0
+- name: create folders
+  file:
+    path: /var/log/cronjobs
+    state: directory
+    mode: 0755
+- name: copy init and ssh files
+  copy: src={{ item.src }} dest={{ item.dest }}
+  mode: 0644
+  with_items:
+    - { src: 'files/init/', dest: '/etc/init/' }
+    - { src: 'files/ssh/', dest: '/etc/ssh/' }
+    - { src: 'files/unattended-upgrades/', dest: '/etc/apt/apt.conf.d/' }
+    - { src: 'files/env/environment', dest: '/etc/environment' }
+- name: copy motd files
+  copy: 
+    src: 'files/update-motd.d/20-ip-address'
+    dest: '/etc/update-motd.d/20-ip-address'
+    mode: 0750
+- name: copy bin files
+  copy: src={{ item.src }} dest={{ item.dest }}
+  mode: 0755
+  with_items:
+    - { src: 'files/bin/', dest: '/usr/local/bin/' }
+    - { src: 'files/sbin', dest: '/usr/local/sbin/' }
+  notify: Update APT
+- name: apply dhclient config
+  template: 
+    src: templates/dhclient.conf.j2
+    dest: /etc/dhcp/dhclient.conf
+    mode: 0644
+- name: configure system
+  file: src={{ item }} dest= /dev/null
+  state: link
+  with_items:
+    - '/etc/udev/rules.d/70-persistent-net.rules'
+    - '/etc/udev/rules.d/70-persistent-cd.rules'
+- name: enable and start dnstest service
+  service: name=dnstest state=started enabled=yes
+- cron:
+    name: PATH
+    env: yes
+    value: /usr/local/bin
+- cron:
+    name: PATH
+    env: yes
+    value: /usr/local/sbin
+- name: Cleanup old kernels
+  cron: 
+    hour: 6
+    minute: 30
+    job: "/usr/local/sbin/clean_kernels.py >> /var/log/cronjobs/clean_kernels.log 2>&1"
+- name: Geolocate
+  cron: 
+    hour: 14
+    minute: 1
+    job: "/usr/local/bin/facter_utcoffset.sh"
+- name: Update APT
+  cron: 
+    hour: 0
+    minute: 0
+    job: "/usr/local/bin/update_apt.sh >> /var/log/cronjobs/update_apt.log 2>&1"
+- name: Reboot with delay
+  cron:
+    minute: 0
+    hour: 12
+    weekday: 2
+    job: '/usr/local/sbin/reboot-with-delay.sh 50'
+    #- name: Create crontab entry to clone/pull git repository
+#  template:
+#    src: templates/etc_cron.d_ansible-pull.j2
+#    dest: /etc/cron.d/ansible-pull
+#    owner: root
+#    group: root
+#    mode: 0644

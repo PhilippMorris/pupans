@@ -1,0 +1,70 @@
+---
+- name: Install tftpd-hpa
+  apt: 
+    name: tftpd-hpa 
+    state: latest
+- name: copy tftpd files
+  copy: src={{ item.src }} dest={{ item.dest }}
+    owner: root
+    group: root
+  with_items:
+    - { src: 'files/tftpd-hpa', dest: '/etc/default/tftpd-hpa' }
+    - { src: 'files/tftpd.map', dest: '/etc/tftpd.map' }
+    - { src: 'files/share/', dest: '/usr/share/tftpd/' }
+    - { src: 'files/stationcontent/', dest: '/opt/stationcontent/' }
+- name: create winpe folders
+  file:
+    path: {{item}}
+    state: directory
+    mode: 2755
+    owner: root
+    group: root    
+  with_items:
+    - /usr/share/pxe/winpe/
+    - /usr/share/pxe/clonezilla/
+  notify:
+   - SymlinkWinPe
+   - SymlinkClonezilla
+- name: Create symlink for winpe
+  file:
+    src: /usr/share/pxe/winpe
+    dest: /usr/share/tftpd/winpe
+    owner: root
+    group: root
+    state: link
+    force: yes
+  notify: check tftpd-hpa running
+- cron:
+    name: Symlink WinPE
+    minute: 15
+    hour: *
+    job: "/opt/stationcontent/symlinkcontent.py --targetdir /usr/share/pxe/winpe --contentfilter winpe-* >> /var/log/cronjobs/symlinkcontent_winpe.log 2>&1"
+- cron:
+    name: Symlink Clonezilla
+    minute: 20
+    hour: *
+    job: "/opt/stationcontent/symlinkcontent.py --targetdir /usr/share/pxe/clonezilla --contentfilter clonezilla-* >> /var/log/cronjobs/symlinkcontent_clonezilla"
+- cron:
+    name: Symlink Packages
+    minute: 15
+    hour: *
+    job: "/opt/stationcontent/symlinkcontent.py --targetdir /srv/packages --contentfilter package-* >> /var/log/cronjobs/symlinkcontent_packages.log 2>&1"
+- cron:
+    name: Symlink Apps
+    minute: 45
+    hour: 2,4,6,8,10,12,14,16,18,20,22
+    job: "/opt/stationcontent/symlinkcontent.py --targetdir /srv/packages --contentfilter app-* >> /var/log/cronjobs/symlinkcontent_apps.log 2>&1"
+- cron:
+    name: Symlink Media
+    minute: 15
+    hour: *
+    job: /opt/stationcontent/symlinkcontent.py --targetdir /srv/media --contentfilter media-* >> /var/log/cronjobs/symlinkcontent_media.log 2>&1"
+- cron:
+    name: Symlink Mac
+    minute: 15
+    hour: *
+    job: "/opt/stationcontent/symlinkcontent.py --targetdir /srv/mac --contentfilter mac-* >> /var/log/cronjobs/symlinkcontent_mac.log 2>&1"
+
+    
+    
+    

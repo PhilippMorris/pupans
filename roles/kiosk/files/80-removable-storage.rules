@@ -1,0 +1,2 @@
+KERNEL=="sd?",ACTION=="add",RUN+="/opt/kiosk/send_event_device_add.sh $kernel USB"
+KERNEL=="sd?",ACTION=="remove",RUN+="/opt/kiosk/send_event_device_remove.sh $kernel"

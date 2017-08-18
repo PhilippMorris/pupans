@@ -1,0 +1,53 @@
+---
+- name: copy syncstatus.conf
+  copy: 
+    src: files/{{ ansible_domain }}-syncstatus.conf
+    dest: /opt/sync/syncstatus.conf
+    owner: root
+    group: root
+    mode: 0750
+- name: copy sync files
+  copy: 
+    src: files/sync/
+    dest: /opt/sync/
+    owner: root
+    group: root
+    mode: 0750
+- name: create p2pclient folders
+  file:
+    path: {{item}}
+    state: directory
+    mode: 2755
+    owner: root
+    group: root    
+  with_items:
+    - /usr/share/p2pclient/download/
+    - /usr/share/p2pclient/torrents/
+- name: Create symlink for sync
+  file:
+    src: /usr/share/p2pclient/torrents/storage.xml
+    dest: /usr/share/p2pclient/torrents/storage_stations.xml
+    state: link
+    force: yes
+- cron:
+    name: Sync packages Sunday
+    minute: 0
+    hour: 7
+    weekday: 0
+    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder 'https://seeder.basechord.com' --speed 'high' --seederuser --branch {{branch}} --seederpassword) >> /var/log/cronjobs/sync.log 2>&1"
+- cron:
+    name: Sync packages nighttime
+    minute: 0
+    hour: 22
+    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder 'https://seeder.basechord.com' --speed 'high' --seederuser --branch {{branch}} --seederpassword) >> /var/log/cronjobs/sync.log 2>&1"
+- cron:
+    name: Sync packages daytime
+    minute: 0
+    hour: 7
+    weekday: 1-6
+    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder 'https://seeder.basechord.com' --speed 'low' --seederuser --branch {{branch}} --seederpassword) >> /var/log/cronjobs/sync.log 2>&1"
+- cron:
+    name: Sync status
+    minute: 0
+    hour: 8
+    job: "(/usr/local/bin/random-delay.sh 3500; /opt/sync/syncstatus.py --downloads /usr/share/p2pclient/download/ post) >> /var/log/cronjobs/sync-status.log 2>&1"

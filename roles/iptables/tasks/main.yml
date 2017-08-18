@@ -1,0 +1,16 @@
+---
+- name: install iptables
+  apt: name={{ item }} state=latest
+  with_items:
+    - iptables
+    - iptables-persistent
+    - iptstate
+- name: copy iptables rules file
+  template: 
+    src: templates/iptables-rules.sh.j2
+    dest: /etc/iptables/iptables-rules.sh
+    owner: root
+    group: root
+    mode: 0755
+- name: run script to create iptables rules
+  script: /etc/iptables/iptables-rules.sh

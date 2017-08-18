@@ -1,0 +1,66 @@
+---
+- name: Copy google-chrome 49
+  copy: 
+    src: files/google-chrome-stable_49.0.2623.112-1_amd64.deb
+    dest: /tmp/google-chrome-stable_49.0.2623.112-1_amd64.deb
+    owner: root
+    group: root
+    mode: 0644
+- name: Install google-chrome 49
+  apt:
+    deb: /tmp/google-chrome-stable_49.0.2623.112-1_amd64.deb
+- name: Copy Network performance config
+  copy: 
+    src: files/60-network-performance.conf 
+    dest: /etc/sysctl.d/60-network-performance.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Update Network
+- name: Copy interfaces config
+  copy: 
+    src: files/interfaces-{{interfaces_config}}
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 0644
+  notify: Update Network
+- name: Copy HD Parameters
+  copy: 
+    src: files/hdparm.conf
+    dest: /etc/hdparm.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Update HD Parameters
+- name: copy needed files
+  copy: src={{ item.src }} dest={{ item.dest }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - { src: 'files/sysstation', dest: '/opt/connection-status/' }
+    - { src: 'files/opt/', dest: '/opt/' }
+    - { src: 'files/powerbtn.sh', dest: '/etc/acpi/powerbtn.sh' }
+- name: apt-get update
+  command: /usr/bin/apt-get -f -y install
+- cron:
+    name: Network-Status
+    reboot: yes
+    job: /usr/bin/python /opt/connection-status/connection-status.py --persist
+- cron:
+    name: Send HW info
+    reboot: yes
+    job: /usr/bin/python /opt/gethwinfo.py
+- cron:
+    name: clean-logs
+    minute: 0
+    hour: 0
+    day: 1
+    job: /usr/bin/find /var/log/ -mtime +30 -type f -delete
+- cron:
+    name: clean-cron-logs
+    minute: 0
+    hour: 0
+    day: 1
+    job: sudo /bin/rm -f /var/log/cronjobs/*

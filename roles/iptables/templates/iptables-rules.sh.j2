@@ -1,0 +1,93 @@
+#! /bin/bash
+
+iptables --flush
+
+# Default DROP
+#
+
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+##
+## PUBLIC INTERFACE {{ ifpublic }}
+##
+
+# Apt-cacher
+iptables -A OUTPUT -o {{ ifpublic }} -p tcp --dport 3142 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i {{ ifpublic }} -p tcp --sport 3142 -m state --state ESTABLISHED -j ACCEPT
+
+# HTTP Outgoing Connections
+iptables -A OUTPUT -o {{ ifpublic }} -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i {{ ifpublic }} -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
+
+# HTTPS Outgoing Connections
+iptables -A OUTPUT -o {{ ifpublic }} -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i {{ ifpublic }} -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
+
+# SSH
+#
+# Drop new SSH connections when incoming at too high rate
+iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --set
+iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 5 -j DROP
+iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 5 -j LOG
+
+# Allow SSH
+iptables -A INPUT -i {{ ifpublic }} -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o {{ ifpublic }} -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+
+# Allow SSH Outgoing Reverse Tunnel
+iptables -A INPUT -i {{ ifpublic }} -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o {{ ifpublic }} -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# DNS Client
+#
+iptables -A OUTPUT -o {{ ifpublic }} -p udp --dport 53 -j ACCEPT
+iptables -A INPUT -i {{ ifpublic }} -p udp --sport 53 -j ACCEPT
+iptables -A OUTPUT -o {{ ifpublic }} -p tcp --dport 53 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i {{ ifpublic }} -p tcp --sport 53 -m state --state ESTABLISHED -j ACCEPT
+
+# DHCP Client
+#
+iptables -A INPUT  -i {{ ifpublic }} -p udp --sport 67 --dport 68 -j ACCEPT 
+iptables -A OUTPUT -o {{ ifpublic }} -p udp --sport 68 --dport 67 -j ACCEPT
+
+# NTP
+#
+iptables -A OUTPUT -p udp --dport 123 -j ACCEPT
+iptables -A INPUT -p udp --sport 123 -j ACCEPT
+
+##
+## PRIVATE INTERFACE {{ ifprivate }}
+##
+
+# Accept any outgoing and incoming UDP packets to satisfy TFTP.
+iptables -A OUTPUT -o {{ ifprivate }} -p udp -j ACCEPT
+iptables -A INPUT -i {{ ifprivate }} -p udp -j ACCEPT
+
+# HTTP Server
+#
+iptables -A INPUT -i {{ ifprivate }} -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o {{ ifprivate }} -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
+
+# SMB Server
+#
+iptables -A INPUT -i {{ ifprivate }} -p tcp --dport 445 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o {{ ifprivate }} -p tcp --sport 445 -m state --state ESTABLISHED -j ACCEPT
+
+##
+## LOOPBACK ADAPTER
+##
+
+# Accept any traffic on the loopback adapter
+#
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+
+iptables-save -c > /etc/iptables/rules.v4
+
+ip6tables -P OUTPUT DROP
+ip6tables -P INPUT DROP
+ip6tables -P FORWARD DROP
+
+ip6tables-save > /etc/iptables/rules.v6

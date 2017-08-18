@@ -1,0 +1,44 @@
+---
+- name: copy mtu-discover.conf
+  copy: 
+    src: "files/{{ item }} "
+    dest: "/opt/mtu-discover/"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - mtu-discover.conf
+    - mtu-discover.sh
+  when: enable
+- name: Check for and apply reduced MTU
+  command: "/opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1"
+  when: enable
+- cron:
+    name: Check for and apply reduced MTU at boot
+    reboot: yes
+    job: "/opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1"
+  when: enable
+- cron:
+    name: Check for and apply reduced MTU
+    hour: *
+    job: "(/usr/local/bin/random-delay.sh 3600; /opt/mtu-discover/mtu-discover.sh --apply) >> /var/log/cronjobs/mtu-discover.log 2>&1"
+  when: enable
+- name: remove mtu-discover files
+  file: 
+    dest: {{ item }}
+    state: absent
+  with_items:
+    - "/opt/mtu-discover/"
+    - "/etc/network/if-up.d/000mtu"
+  when: not enable
+- name: Check for and apply reduced MTU
+  command: "/opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1"
+  when: not enable
+- cron:
+    name: Check for and apply reduced MTU at boot
+    state: absent
+  when: not enable
+- cron:
+    name: Check for and apply reduced MTU
+    state: absent
+  when: not enable

@@ -1,0 +1,46 @@
+---
+- name: Install samba
+  apt: name=samba state=latest
+- service:
+    name: nmbd
+    state: started
+    enabled: yes
+- service:
+    name: smbd
+    state: started
+    enabled: yes
+- name: Add user guest
+  user: 
+    name: guest
+    createhome: yes
+    password: $1$qUaDAYTb$le7UW/Oqmo6tYwJSWDVDe0
+  notify: add guest to smb
+- name: Copy samba config
+  template: 
+    src: files/smb.conf.j2
+    dest: /etc/samba/smb.conf
+    owner: root
+- name: 
+  file:
+    path: /srv/packages/ServiceCenter.mode
+    owner: guest
+    group: guest
+    mode: 0755
+    state: touch
+    when: SC
+- name: 
+  file:
+    path: /srv/packages/RecoveryImage.enable
+    owner: guest
+    group: guest
+    mode: 0755
+    state: touch
+    when: RI
+- name: 
+  file:
+    path: /srv/packages/UniversalImage.enable
+    owner: guest
+    group: guest
+    mode: 0755
+    state: touch
+    when: UI

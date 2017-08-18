@@ -1,0 +1,8 @@
+---
+- name: copy multihomed
+  copy: 
+    src: "templates/interfaces.erb"
+    dest: "/etc/network/interfaces"
+    owner: root
+    group: root
+    mode: 0755

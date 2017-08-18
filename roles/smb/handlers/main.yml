@@ -1,0 +1,3 @@
+---
+- name: add guest to smb
+  command: '/bin/echo -ne "R3fresh\nR3fresh\n" | /usr/bin/smbpasswd -a -s guest'

@@ -1,0 +1,2 @@
+ifpublic: eth0
+ifprivate: eth1

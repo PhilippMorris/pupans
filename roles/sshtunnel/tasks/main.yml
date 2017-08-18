@@ -1,0 +1,32 @@
+---
+- name: install autossh
+  apt: 
+    name: autossh 
+    state: latest
+- name: copy sshtunnel.conf.erb
+  copy: 
+    src: files/sshtunnel.conf
+    dest: /etc/init/sshtunnel.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - Restart SSH tunnel
+- name: copy needed files
+  copy: 
+    src: 'files/sshtunnel/'
+    dest: '/opt/sshtunnel/'
+    owner: root
+    group: root
+    mode: 755
+- name: 
+  file:
+    path: /opt/sshtunnel/pat
+    owner: root
+    group: root
+    mode: 0666
+    state: touch
+- name: 
+  file:
+    path: /etc/sshtunnel
+    state: absent

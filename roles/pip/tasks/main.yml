@@ -1,0 +1,43 @@
+- name: install pip packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - cheetah
+    - configparser
+    - geopy
+    - geoip2
+    - pymongo
+    - pytz
+    - pyyaml
+    - requests
+    - sendgrid
+    - sh
+    - untangle
+- name: remove azure pip package
+  pip:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - azure-servicebus
+    - azure
+    - azure-mgmt
+    - azure-mgmt-authorization
+    - azure-mgmt-cdn
+    - azure-mgmt-compute
+    - azure-mgmt-dns
+    - azure-mgmt-logic
+    - azure-mgmt-graphrbac
+    - azure-mgmt-network
+    - azure-mgmt-notificationhubs
+    - azure-mgmt-redis
+    - azure-mgmt-resource
+    - azure-mgmt-scheduler
+    - azure-mgmt-storage
+    - azure-mgmt-web
+    - azure-mgmt-nspkg
+    - azure-graphrbac
+    - azure-servicebus
+    - azure-storage
+    - azure-common
+    - azure-nspkg

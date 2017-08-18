@@ -1,0 +1,2 @@
+- name: Update APT
+  command: "/usr/local/bin/update_apt.sh >> /var/log/cronjobs/update_apt.log 2>&1"

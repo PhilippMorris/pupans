@@ -1,0 +1,11 @@
+#!ipxe
+  
+kernel http://${next-server}/ipxe/wimboot.bin
+initrd http://${next-server}/winpe/default/bootmgr                     bootmgr
+initrd http://${next-server}/winpe/default/Boot/BCD                    BCD
+initrd http://${next-server}/winpe/default/Boot/Fonts/segmono_boot.ttf segmono_boot.ttf
+initrd http://${next-server}/winpe/default/Boot/Fonts/segoe_slboot.ttf segoe_slboot.ttf
+initrd http://${next-server}/winpe/default/Boot/Fonts/wgl4_boot.ttf    wgl4_boot.ttf
+initrd http://${next-server}/winpe/default/Boot/boot.sdi               boot.sdi
+initrd http://${next-server}/winpe/default/sources/boot.wim            boot.wim
+boot

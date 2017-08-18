@@ -1,0 +1,4 @@
+{
+  "URLBlacklist": ["*"],
+  "URLWhitelist": ["192.168.108.5"]
+}
