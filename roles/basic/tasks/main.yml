@@ -12,7 +12,8 @@
   file:
     path: /etc/apt/sources.list
     state: absent
-- apt_repository:
+- name: set repos
+  apt_repository:
     repo: "{{ item }}"
     state: present
   with_files:
