@@ -10,14 +10,24 @@
   with_items:
     - cheetah
     - configparser
+    - distribute
     - geopy
     - geoip2
+    - httplib2
+    - Jinja2
+    - MarkupSafe
+    - paramiko
     - pymongo
+    - pycurl
     - pytz
+    - python-apt
+    - python-debian
     - pyyaml
     - requests
     - sendgrid
+    - setuptools
     - sh
+    - six
     - untangle
 - name: remove azure pip package
   pip:
