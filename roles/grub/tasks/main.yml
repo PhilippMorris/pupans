@@ -37,10 +37,10 @@
     regexp: '.*GRUB_CMDLINE_LINUX_DEFAULT=.*'
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
   notify: update grub
-- name: Make grub default EFI boot manager
-  copy: 
-    src: /boot/efi/EFI/ubuntu/grubx64.efi 
-    dest: /boot/efi/EFI/BOOT/bootx64.efi
+#- name: Make grub default EFI boot manager
+#  copy: 
+#    src: /boot/efi/EFI/ubuntu/grubx64.efi 
+#    dest: /boot/efi/EFI/BOOT/bootx64.efi
 - name: Update GRUB_DEFAULT
   lineinfile:
     path: /etc/default/grub
