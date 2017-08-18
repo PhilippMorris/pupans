@@ -23,11 +23,10 @@
     - geoip2
     - httplib2
     - Jinja2
-    - MarkupSafe
     - paramiko
     - pymongo
     - pytz
-    - python-apt
+#    - python-apt
     - python-debian
     - pyyaml
     - requests
