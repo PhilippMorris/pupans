@@ -98,7 +98,7 @@
     mode: 0644
 - name: configure system
   file: src="{{ item }}" dest= /dev/null
-    state: link
+  state: link
   with_items:
     - '/etc/udev/rules.d/70-persistent-net.rules'
     - '/etc/udev/rules.d/70-persistent-cd.rules'
