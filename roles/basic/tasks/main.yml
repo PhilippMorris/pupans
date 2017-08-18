@@ -93,7 +93,7 @@
     mode: 0755
   with_items:
     - { src: 'files/bin/', dest: '/usr/local/bin/' }
-    - { src: 'files/sbin', dest: '/usr/local/sbin/' }
+    - { src: 'files/sbin/', dest: '/usr/local/sbin/' }
   notify: Update APT
 - name: apply dhclient config
   template: 
@@ -102,8 +102,8 @@
     mode: 0644
 - name: configure system
   file: 
-    src: "{{ item }}" 
-    dest: /dev/null
+    src: /dev/null
+    dest: "{{ item }}"
     state: link
   with_items:
     - '/etc/udev/rules.d/70-persistent-net.rules'
