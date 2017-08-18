@@ -1,14 +1,2 @@
 ---
-# schedule is fed directly to cron
-schedule: '* 3 * * *'
-
-# File that ansible will use for logs
-logfile: /var/log/ansible-pull.log
-
-# Directory to where repository will be cloned
-workdir: /var/lib/ansible/local
-
-# Repository to check out -- YOU MUST CHANGE THIS
-# repo must contain a local.yml file at top level
-#repo_url: git://github.com/sfromm/ansible-playbooks.git
-repo_url: https://github.com/PhilippMorris/Ansible.git
+managed_files: us_archive_ubuntu_com_ubuntu.list
