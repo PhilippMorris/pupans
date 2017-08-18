@@ -16,7 +16,7 @@
   apt_repository:
     repo: "{{ item }}"
     state: present
-  with_files:
+  with_items:
    - deb http://us.archive.ubuntu.com/ubuntu/ precise main restricted universe multiverse
    - deb http://us.archive.ubuntu.com/ubuntu/ precise-security main restricted universe multiverse
    - deb http://us.archive.ubuntu.com/ubuntu/ precise-updates main restricted universe multiverse
