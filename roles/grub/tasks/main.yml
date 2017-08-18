@@ -38,7 +38,15 @@
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
   notify: update grub
 - name: Make grub default EFI boot manager
-  command: /bin/mkdir -p /boot/efi/EFI/BOOT; /bin/cp /boot/efi/EFI/ubuntu/grubx64.efi /boot/efi/EFI/BOOT/bootx64.efi
+  copy: 
+    src: /boot/efi/EFI/ubuntu/grubx64.efi 
+    dest: /boot/efi/EFI/BOOT/bootx64.efi
+- name: Update GRUB_DEFAULT
+  lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: '.*GRUB_DEFAULT=.*'
+    line: 'GRUB_DEFAULT=saved'
 - name: Copy grub config for kiosk
   copy: 
     src: files/40_custom
@@ -47,11 +55,6 @@
     group: root
     mode: 0755
   notify: update grub
-- name: Update GRUB_DEFAULT
-  lineinfile:
-    path: /etc/default/grub
-    state: present
-    regexp: '.*GRUB_DEFAULT=.*'
-    line: 'GRUB_DEFAULT=saved'
+- name: set default "Kiosk mode"
   command: grub-set-default "Kiosk mode"
   notify: update grub
