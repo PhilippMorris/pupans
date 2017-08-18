@@ -14,8 +14,7 @@
     src: files/60-network-performance.conf 
     dest: /etc/sysctl.d/60-network-performance.conf
     owner: root
-    group: root
-    mode: 0755
+    group: root644
   notify: Update Network
 - name: Copy interfaces config
   copy: 
@@ -46,21 +45,25 @@
     - { src: 'files/powerbtn.sh', dest: '/etc/acpi/powerbtn.sh' }
 - name: apt-get update
   command: /usr/bin/apt-get -f -y install
-- cron:
+- name: add cron job Network-Status
+  cron:
     name: Network-Status
     reboot: yes
     job: /usr/bin/python /opt/connection-status/connection-status.py --persist
-- cron:
+- name: add cron job Send HW info
+  cron:
     name: Send HW info
     reboot: yes
     job: /usr/bin/python /opt/gethwinfo.py
-- cron:
+- name: add cron job clean-logs
+  cron:
     name: clean-logs
     minute: 0
     hour: 0
     day: 1
     job: /usr/bin/find /var/log/ -mtime +30 -type f -delete
-- cron:
+- name: add cron job clean-cron-logs
+  cron:
     name: clean-cron-logs
     minute: 0
     hour: 0
