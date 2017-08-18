@@ -21,7 +21,7 @@
    - deb http://us.archive.ubuntu.com/ubuntu/ precise-updates main restricted universe multiverse
    - deb http://us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse
 - name: Install basic software
-  apt: name={{ item }} state=latest
+  apt: name="{{ item }}" state=latest
   with_items:
     - acpid
     - acl
@@ -47,7 +47,7 @@
 #    - 'ansible'
 - name: Add groups 
   group: 
-    name: {{ item }}
+    name: "{{ item }}"
   with_items:
   - kiosk
   - acadmin
@@ -69,7 +69,7 @@
     state: directory
     mode: 0755
 - name: copy init and ssh files
-  copy: src={{ item.src }} dest={{ item.dest }}
+  copy: src="{{ item.src }}" dest="{{ item.dest }}"
   mode: 0644
   with_items:
     - { src: 'files/init/', dest: '/etc/init/' }
@@ -82,7 +82,7 @@
     dest: '/etc/update-motd.d/20-ip-address'
     mode: 0750
 - name: copy bin files
-  copy: src={{ item.src }} dest={{ item.dest }}
+  copy: src="{{ item.src }}" dest="{{ item.dest }}"
   mode: 0755
   with_items:
     - { src: 'files/bin/', dest: '/usr/local/bin/' }
@@ -94,7 +94,7 @@
     dest: /etc/dhcp/dhclient.conf
     mode: 0644
 - name: configure system
-  file: src={{ item }} dest= /dev/null
+  file: src="{{ item }}" dest= /dev/null
   state: link
   with_items:
     - '/etc/udev/rules.d/70-persistent-net.rules'
