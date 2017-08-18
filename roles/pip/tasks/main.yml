@@ -12,7 +12,7 @@
 - name: install pip packages
   pip:
     name: "{{ item }}"
-    state: latest
+    state: absent
   with_items:
     - urllib3[secure]
     - cheetah
@@ -25,7 +25,6 @@
     - MarkupSafe
     - paramiko
     - pymongo
-    - pycurl
     - pytz
     - python-apt
     - python-debian
