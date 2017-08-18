@@ -22,7 +22,9 @@
    - deb http://us.archive.ubuntu.com/ubuntu/ precise-updates main restricted universe multiverse
    - deb http://us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse
 - name: Install basic software
-  apt: name="{{ item }}" state=latest
+  apt: 
+    name: "{{ item }}" 
+    state: latest
   with_items:
     - acpid
     - acl
@@ -85,8 +87,10 @@
     dest: '/etc/update-motd.d/20-ip-address'
     mode: 0750
 - name: copy bin files
-  copy: src="{{ item.src }}" dest="{{ item.dest }}"
-  mode: 0755
+  copy: 
+    src: "{{ item.src }}" 
+    dest: "{{ item.dest }}"
+    mode: 0755
   with_items:
     - { src: 'files/bin/', dest: '/usr/local/bin/' }
     - { src: 'files/sbin', dest: '/usr/local/sbin/' }
@@ -97,13 +101,18 @@
     dest: /etc/dhcp/dhclient.conf
     mode: 0644
 - name: configure system
-  file: src="{{ item }}" dest= /dev/null
-  state: link
+  file: 
+    src: "{{ item }}" 
+    dest: /dev/null
+    state: link
   with_items:
     - '/etc/udev/rules.d/70-persistent-net.rules'
     - '/etc/udev/rules.d/70-persistent-cd.rules'
 - name: enable and start dnstest service
-  service: name=dnstest state=started enabled=yes
+  service: 
+    name: dnstest 
+    state: started 
+    enabled: yes
 - name: rename station
   command: /usr/local/bin/rename.sh
 - cron:
