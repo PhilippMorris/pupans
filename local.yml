@@ -8,8 +8,8 @@
 #    - pip
 #    - grub
 #    - plymouth
-    - mtu-discover
-#    - iptables
+#    - mtu-discover
+    - iptables
 #    - ntp
 #    - dhcp
 #    - tftp

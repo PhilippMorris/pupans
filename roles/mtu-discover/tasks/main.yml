@@ -34,12 +34,12 @@
     - "/opt/mtu-discover/"
     - "/etc/network/if-up.d/000mtu"
   when: not enable
-- name: add cron job Check for and apply reduced MTU at boot
+- name: remove cron job Check for and apply reduced MTU at boot
   cron:
     name: Check for and apply reduced MTU at boot
     state: absent
   when: not enable
-- name: add cron job Check for and apply reduced MTU
+- name: remove cron job Check for and apply reduced MTU
   cron:
     name: Check for and apply reduced MTU
     state: absent
