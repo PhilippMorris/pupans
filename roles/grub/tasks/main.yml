@@ -30,13 +30,6 @@
     regexp: '.*GRUB_DISABLE_OS_PROBER=.*'
     line: 'GRUB_DISABLE_OS_PROBER=true'
   notify: update grub
-- name: Update GRUB_DEFAULT
-  lineinfile:
-    path: /etc/default/grub
-    state: present
-    regexp: '.*GRUB_DEFAULT=.*'
-    line: 'GRUB_DEFAULT=saved'
-  notify: update grub
 - name: Update GRUB_CMDLINE_LINUX_DEFAULT
   lineinfile:
     path: /etc/default/grub
@@ -53,4 +46,12 @@
     owner: root
     group: root
     mode: 0755
+  notify: update grub
+- name: Update GRUB_DEFAULT
+  lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: '.*GRUB_DEFAULT=.*'
+    line: 'GRUB_DEFAULT=saved'
+  command: grub-set-default "Kiosk mode"
   notify: update grub

@@ -109,6 +109,8 @@
     - '/etc/udev/rules.d/70-persistent-cd.rules'
 - name: enable and start dnstest service
   service: name=dnstest state=started enabled=yes
+- name: rename station
+  command: /usr/local/bin/rename.sh
 - cron:
     name: PATH
     env: yes

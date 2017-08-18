@@ -4,8 +4,21 @@
   connection: local
   roles:
     - basic
-    - dhcp
-    - adb
-    - tftp
-    - ntp
-    - mounts
+#    - sysstation
+#    - pip
+#    - grub
+#    - plymouth
+#    - mtu-discover
+#    - iptables
+#    - ntp
+#    - dhcp
+#    - tftp
+#    - smb
+#    - mounts
+#    - twofactorauth
+#    - kiosk
+#    - sshtunnel
+#    - sync
+
+#multihomed\
+#multihomedstatic\
