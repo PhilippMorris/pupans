@@ -1,14 +1,11 @@
 ---
 - name: copy mtu-discover.conf
   copy: 
-    src: "files/{{ item }}"
+    src: "files/"
     dest: "/opt/mtu-discover/"
     owner: root
     group: root
     mode: 0755
-  with_items:
-    - mtu-discover.conf
-    - mtu-discover.sh
   when: enable
 - name: Check for and apply reduced MTU
   command: "/opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1"
