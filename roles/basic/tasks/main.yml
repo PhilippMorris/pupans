@@ -13,7 +13,7 @@
     path: /etc/apt/sources.list
     state: absent
 - apt_repository:
-    repo: {{ item }}
+    repo: "{{ item }}"
     state: present
   with_files:
    - deb http://us.archive.ubuntu.com/ubuntu/ precise main restricted universe multiverse
