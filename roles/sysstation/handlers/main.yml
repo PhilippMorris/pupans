@@ -1,6 +1,7 @@
 ---
 - name: Update Network
   command: /sbin/sysctl -p /etc/sysctl.d/60-network-performance.conf
-  command: /sbin/ifconfig eth0 mtu 1500
+- name: Update MTU
+  command: /sbin/ifconfig eth0 mtu 1500  
 - name: Update HD Parameters
   command: /sbin/hdparm -B 127 -K 1 -S 242 -W 0 /dev/sd?
