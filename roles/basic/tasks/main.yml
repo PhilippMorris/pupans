@@ -86,7 +86,7 @@
     mode: 0750
 - name: copy bin files
   copy: src="{{ item.src }}" dest="{{ item.dest }}"
-    mode: 0755
+  mode: 0755
   with_items:
     - { src: 'files/bin/', dest: '/usr/local/bin/' }
     - { src: 'files/sbin', dest: '/usr/local/sbin/' }
