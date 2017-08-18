@@ -47,7 +47,6 @@
     - unattended-upgrades
     - vim
     - vnstat
-#    - 'ansible'
 - name: Add groups 
   group: 
     name: "{{ item }}"
@@ -119,28 +118,28 @@
 - cron:
     name: PATH
     env: yes
-    value: /usr/local/bin
-- cron:
-    name: PATH
-    env: yes
-    value: /usr/local/sbin
+    value: /usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 - name: Cleanup old kernels
   cron: 
+    name: Cleanup old kernels
     hour: 6
     minute: 30
     job: "/usr/local/sbin/clean_kernels.py >> /var/log/cronjobs/clean_kernels.log 2>&1"
 - name: Geolocate
-  cron: 
+  cron:
+    name: Geolocate
     hour: 14
     minute: 1
     job: "/usr/local/bin/facter_utcoffset.sh"
 - name: Update APT
-  cron: 
+  cron:
+    name: Update APT
     hour: 0
     minute: 0
     job: "/usr/local/bin/update_apt.sh >> /var/log/cronjobs/update_apt.log 2>&1"
 - name: Reboot with delay
   cron:
+    name: Reboot with delay
     minute: 0
     hour: 12
     weekday: 2
