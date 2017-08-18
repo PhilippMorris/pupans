@@ -4,7 +4,7 @@
     name: plymouth-theme-ubuntu-logo
     state: latest
 - name: copy plymouth files
-  copy: src={{ item.src }} dest={{ item.dest }}
+  copy: src="{{ item.src }}" dest="{{ item.dest }}"
   owner: root
   group: root
   mode: 0644
