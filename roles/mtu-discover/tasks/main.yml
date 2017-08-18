@@ -23,7 +23,7 @@
   cron:
     name: Check for and apply reduced MTU
     hour: *
-    job: "(/usr/local/bin/random-delay.sh 3600; /opt/mtu-discover/mtu-discover.sh --apply) >> /var/log/cronjobs/mtu-discover.log 2>&1"
+    job: /usr/local/bin/random-delay.sh 3600; /opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1
   when: enable
 - name: remove mtu-discover files
   file: 
@@ -34,7 +34,7 @@
     - "/etc/network/if-up.d/000mtu"
   when: not enable
 - name: Check for and apply reduced MTU
-  command: "/opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1"
+  command: /opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1
   when: not enable
 - name: add cron job Check for and apply reduced MTU at boot
   cron:
