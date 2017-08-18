@@ -44,6 +44,7 @@
     - jnettop
     - lldpd
     - nmap
+    - openssh-server
     - python-samba
     - python-dev
     - ssh
