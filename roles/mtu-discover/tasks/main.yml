@@ -12,7 +12,7 @@
     mode: 0755
   when: enable
 - name: Check for and apply reduced MTU
-  command: "/opt/mtu-discover/mtu-discover.sh --apply >> /var/log/cronjobs/mtu-discover.log 2>&1"
+  command: /opt/mtu-discover/mtu-discover.sh --apply
   when: enable
 - name: add cron job Check for and apply reduced MTU at boot
   cron:
