@@ -1,6 +1,8 @@
 ---
 - name: install python pip
-  apt: python-pip
+  easy_install:
+    name: pip
+    state: latest
 - name: install pip packages
   pip:
     name: "{{ item }}"
