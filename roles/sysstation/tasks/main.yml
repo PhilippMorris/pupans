@@ -15,7 +15,7 @@
     dest: /etc/sysctl.d/60-network-performance.conf
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
   notify: Update Network
 - name: Copy interfaces config
   copy: 
