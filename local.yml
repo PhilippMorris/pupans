@@ -5,8 +5,8 @@
   roles:
 #    - basic
 #    - sysstation
-    - pip
-#    - grub
+#    - pip
+    - grub
 #    - plymouth
 #    - mtu-discover
 #    - iptables
