@@ -5,15 +5,16 @@
   apt:
     name: python2.7
     update_cache: yes
-- name: install python pip
-  easy_install:
-    name: pip
-    state: latest
+#- name: install python pip
+#  pip:
+#    name: pip
+#    state: latest
 - name: install pip packages
   pip:
     name: "{{ item }}"
-    state: absent
+    state: latest
   with_items:
+    - pip
     - urllib3[secure]
     - cheetah
     - configparser
