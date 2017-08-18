@@ -71,7 +71,7 @@
     mode: 0755
 - name: copy init and ssh files
   copy: src="{{ item.src }}" dest="{{ item.dest }}"
-  mode: 0644
+    mode: 0644
   with_items:
     - { src: 'files/init/', dest: '/etc/init/' }
     - { src: 'files/ssh/', dest: '/etc/ssh/' }
@@ -84,7 +84,7 @@
     mode: 0750
 - name: copy bin files
   copy: src="{{ item.src }}" dest="{{ item.dest }}"
-  mode: 0755
+    mode: 0755
   with_items:
     - { src: 'files/bin/', dest: '/usr/local/bin/' }
     - { src: 'files/sbin', dest: '/usr/local/sbin/' }
@@ -96,7 +96,7 @@
     mode: 0644
 - name: configure system
   file: src="{{ item }}" dest= /dev/null
-  state: link
+    state: link
   with_items:
     - '/etc/udev/rules.d/70-persistent-net.rules'
     - '/etc/udev/rules.d/70-persistent-cd.rules'
