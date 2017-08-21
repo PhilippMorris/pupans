@@ -12,9 +12,9 @@
 #    - iptables
 #    - ntp
 #    - dhcp
+    - mounts
 #    - tftp
-    - smb
-#    - mounts
+#    - smb
 #    - twofactorauth
 #    - kiosk
 #    - sshtunnel
