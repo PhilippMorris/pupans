@@ -20,27 +20,27 @@
     src: templates/smb.conf.j2
     dest: /etc/samba/smb.conf
     owner: root
-- name: 
+- name: set ServiceCenter mode
   file:
     path: /srv/packages/ServiceCenter.mode
     owner: guest
     group: guest
     mode: 0755
     state: touch
-    when: SC
-- name: 
+  when: SC
+- name: set status of Recovery Image
   file:
     path: /srv/packages/RecoveryImage.enable
     owner: guest
     group: guest
     mode: 0755
     state: touch
-    when: RI
-- name: 
+  when: RI
+- name: set status of Universal Image
   file:
     path: /srv/packages/UniversalImage.enable
     owner: guest
     group: guest
     mode: 0755
     state: touch
-    when: UI
+  when: UI
