@@ -18,10 +18,11 @@
     repo: deb-src https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
     filename: 'nodesource'
     state: present
-- name: Install basic software 
-  apt: 
-    name: "{{item}}" 
+- name: Install basic software
+  apt:
+    name: "{{ item }}" 
     state: latest
+    update_cache: yes
   with_items:
        - xorg
        - matchbox 
@@ -31,7 +32,6 @@
        - nodejs
        - android-tools-adb
        - usbmount
-  update_cache: yes
 - name: create folders
   file:
     path: "{{item}}"
