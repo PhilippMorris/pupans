@@ -33,8 +33,8 @@
        - numlockx
        - build-essential
        - nodejs
-       - android-tools-adb
-       - android-tools-fastboot
+#       - android-tools-adb
+#       - android-tools-fastboot
        - usbmount
 - name: create folders
   file:
