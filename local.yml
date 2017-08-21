@@ -12,8 +12,8 @@
 #    - iptables
 #    - ntp
 #    - dhcp
-    - tftp
-#    - smb
+#    - tftp
+    - smb
 #    - mounts
 #    - twofactorauth
 #    - kiosk

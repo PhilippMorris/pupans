@@ -17,7 +17,7 @@
   notify: add guest to smb
 - name: Copy samba config
   template: 
-    src: files/smb.conf.j2
+    src: templates/smb.conf.j2
     dest: /etc/samba/smb.conf
     owner: root
 - name: 
