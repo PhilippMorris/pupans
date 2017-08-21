@@ -9,6 +9,7 @@
     dest: "{{ item.dest }}"
     owner: root
     group: root
+    mode: 0755
   with_items:
     - { src: 'files/tftpd-hpa', dest: '/etc/default/tftpd-hpa' }
     - { src: 'files/tftpd.map', dest: '/etc/tftpd.map' }
