@@ -97,7 +97,7 @@
     job: /usr/bin/killall chrome >> /var/log/cronjobs/restart_chromium.log 2>&1
 - cron:
     name: Pull Kiosk
-    hour: */2
+    hour: "*/2"
     job: /opt/kiosk/kiosk_pull.sh {{branch}}
 - cron:
     name: Pull Kiosk at boot
