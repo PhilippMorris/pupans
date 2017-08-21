@@ -9,8 +9,8 @@
 #    - grub
 #    - plymouth
 #    - mtu-discover
-    - iptables
-#    - ntp
+#    - iptables
+    - ntp
 #    - dhcp
 #    - tftp
 #    - smb
