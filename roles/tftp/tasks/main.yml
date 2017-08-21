@@ -4,7 +4,9 @@
     name: tftpd-hpa 
     state: latest
 - name: copy tftpd files
-  copy: src={{ item.src }} dest={{ item.dest }}
+  copy: 
+    src: "{{ item.src }}" 
+    dest: "{{ item.dest }}"
     owner: root
     group: root
   with_items:
@@ -14,7 +16,7 @@
     - { src: 'files/stationcontent/', dest: '/opt/stationcontent/' }
 - name: create winpe folders
   file:
-    path: {{item}}
+    path: "{{item}}"
     state: directory
     mode: 2755
     owner: root
@@ -23,8 +25,7 @@
     - /usr/share/pxe/winpe/
     - /usr/share/pxe/clonezilla/
   notify:
-   - SymlinkWinPe
-   - SymlinkClonezilla
+   - Symlink
 - name: Create symlink for winpe
   file:
     src: /usr/share/pxe/winpe

@@ -11,8 +11,8 @@
 #    - mtu-discover
 #    - iptables
 #    - ntp
-    - dhcp
-#    - tftp
+#    - dhcp
+    - tftp
 #    - smb
 #    - mounts
 #    - twofactorauth
