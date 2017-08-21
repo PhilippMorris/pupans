@@ -10,8 +10,8 @@
 #    - plymouth
 #    - mtu-discover
 #    - iptables
-    - ntp
-#    - dhcp
+#    - ntp
+    - dhcp
 #    - tftp
 #    - smb
 #    - mounts
