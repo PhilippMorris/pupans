@@ -18,9 +18,6 @@
     repo: deb-src https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
     filename: 'nodesource'
     state: present
-- name: add android-tools-adb repo
-  apt_repository:
-    repo: 'ppa:nilarimogard/webupd8'
 - name: Install basic software
   apt:
     name: "{{ item }}" 
@@ -56,11 +53,21 @@
   - /etc/rc4.d/S30nodm
 - name: Create file .xsession
   copy: 
+    src: files/_.xsession_lab
+    dest: /home/kiosk/.xsession
+    owner: kiosk
+    group: kiosk
+    mode: 0644
+  when: lab
+  notify: Restart X
+- name: Create file .xsession
+  copy: 
     src: files/_.xsession 
     dest: /home/kiosk/.xsession 
     owner: kiosk
     group: kiosk
     mode: 0644
+  when: not lab
   notify: Restart X
 - name: Copy adb
   copy:
