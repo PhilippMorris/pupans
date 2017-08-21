@@ -1,8 +1,8 @@
 ---
 - name: Add Nodesource Keys
   apt_key:
-    url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-    state=present
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
 - name: Import the NodeSource GPG key into apt
   apt_key:
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
@@ -18,22 +18,20 @@
     repo: deb-src https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
     filename: 'nodesource'
     state: present
-- name: Update apt cache
-  apt:
-    update_cache: yes
 - name: Install basic software 
-  apt: name={{item}} state=latest
+  apt: 
+    name: "{{item}}" 
+    state: latest
   with_items:
-#       - chromium-browser
        - xorg
        - matchbox 
        - nodm
        - numlockx
-       - git
        - build-essential
        - nodejs
        - android-tools-adb
        - usbmount
+  update_cache: yes
 - name: create folders
   file:
     path: {{item}}
@@ -45,16 +43,9 @@
     - /var/www/kiosk/public/app
     - /etc/chromium/policies/managed/
     - /var/www/
-- name: Copy nodm config
-  copy: 
-    src: files/nodm 
-    dest: /etc/default/nodm
-    owner: root
-    group: root
-    mode: 0644
 - name: Remove files of nodm
   file: 
-    path: '{{item}}'
+    path: "{{item}}"
     state: absent
   with_items:
   - /etc/rc2.d/S30nodm
@@ -68,33 +59,37 @@
     mode: 0644
   notify: Restart X
 - name: Copy adb
-  copy: 
+  copy:
     src: files/adb 
     dest: /usr/bin/adb
     owner: root
     group: root
     mode: 0755
 - name: copy needed files
-  copy: src={{ item.src }} dest={{ item.dest }}
+  copy: 
+    src: "{{ item.src }}" 
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
   with_items:
     - { src: 'files/bridge.conf', dest: '/etc/init/bridge.conf' }
     - { src: 'files/80-removable-storage.rules', dest: '/etc/udev/rules.d/80-removable-storage.rules' }
     - { src: 'files/tty1.conf', dest: '/etc/init/tty1.conf' }
     - { src: 'files/chromium_policies/default.json', dest: '/etc/chromium/policies/managed/default.json' }
     - { src: 'files/kiosk.conf', dest: '/etc/init/kiosk.conf' }
+    - { src: 'files/nodm', dest: '/etc/default/nodm' }
   notify: Kiosk Pull
-- name: copy bridge files
+- name: copy bridge and kiosk files
   copy: 
-    src: files/bridge/ 
-    dest: /var/www/bridge/
-    mode: 0755
-- name: copy kiosk files
-  copy: 
-    src: files/kiosk/ 
-    dest:  /opt/kiosk/
+    src: "{{ item.src }}" 
+    dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 0750
+    mode: 0755
+  with_items:
+    - { src: 'files/bridge/', dest: '/var/www/bridge/' }
+    - { src: 'files/kiosk/', dest: '/opt/kiosk/' }
 - cron:
     name: Restart Chromium At Midnight
     minute: 0

@@ -15,8 +15,8 @@
 #!    - mounts
 #    - tftp
 #    - smb
-    - twofactorauth
-#    - kiosk
+#    - twofactorauth
+    - kiosk
 #    - sshtunnel
 #    - sync
 
