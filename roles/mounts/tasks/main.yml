@@ -1,13 +1,15 @@
 ---
 - name: Ensure folders are created
   file:
-  with_items:
-    - /home/acadmin/data_0
-    - /home/acadmin/data_1
+    path: "{{ item }}"
     owner: root
     group: root
     mode: 0755
     state: directory
+  with_items:
+    - /home/acadmin/data_0
+    - /home/acadmin/data_1
+
 - name: Mount drive data_0
   mount: 
     path: /home/acadmin/data_0
