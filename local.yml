@@ -12,10 +12,10 @@
 #    - iptables
 #    - ntp
 #    - dhcp
-    - mounts
+#!    - mounts
 #    - tftp
 #    - smb
-#    - twofactorauth
+    - twofactorauth
 #    - kiosk
 #    - sshtunnel
 #    - sync
