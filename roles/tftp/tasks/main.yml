@@ -38,17 +38,17 @@
 - cron:
     name: Symlink WinPE
     minute: 15
-    hour: *
+    hour: "*"
     job: "/opt/stationcontent/symlinkcontent.py --targetdir /usr/share/pxe/winpe --contentfilter winpe-* >> /var/log/cronjobs/symlinkcontent_winpe.log 2>&1"
 - cron:
     name: Symlink Clonezilla
     minute: 20
-    hour: *
+    hour: "*"
     job: "/opt/stationcontent/symlinkcontent.py --targetdir /usr/share/pxe/clonezilla --contentfilter clonezilla-* >> /var/log/cronjobs/symlinkcontent_clonezilla"
 - cron:
     name: Symlink Packages
     minute: 15
-    hour: *
+    hour: "*"
     job: "/opt/stationcontent/symlinkcontent.py --targetdir /srv/packages --contentfilter package-* >> /var/log/cronjobs/symlinkcontent_packages.log 2>&1"
 - cron:
     name: Symlink Apps
@@ -58,12 +58,12 @@
 - cron:
     name: Symlink Media
     minute: 15
-    hour: *
+    hour: "*"
     job: /opt/stationcontent/symlinkcontent.py --targetdir /srv/media --contentfilter media-* >> /var/log/cronjobs/symlinkcontent_media.log 2>&1"
 - cron:
     name: Symlink Mac
     minute: 15
-    hour: *
+    hour: "*"
     job: "/opt/stationcontent/symlinkcontent.py --targetdir /srv/mac --contentfilter mac-* >> /var/log/cronjobs/symlinkcontent_mac.log 2>&1"
 
     
