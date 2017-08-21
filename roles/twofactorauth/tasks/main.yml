@@ -2,6 +2,11 @@
   apt: 
     name: libpam-google-authenticator 
     state: latest
+- name: check if directory .ssh exists
+  file: 
+    path: /home/acadmin/.ssh/
+    recurse: yes
+    state: directory
 - name: copy sshd config
   copy: 
     src: files/ssh
