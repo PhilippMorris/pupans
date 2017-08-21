@@ -18,6 +18,9 @@
     repo: deb-src https://deb.nodesource.com/node_0.12 {{ ansible_distribution_release }} main
     filename: 'nodesource'
     state: present
+- name: add android-tools-adb repo
+  apt_repository:
+    repo: 'ppa:nilarimogard/webupd8'
 - name: Install basic software
   apt:
     name: "{{ item }}" 
@@ -31,6 +34,7 @@
        - build-essential
        - nodejs
        - android-tools-adb
+       - android-tools-fastboot
        - usbmount
 - name: create folders
   file:
