@@ -20,6 +20,11 @@
     src: templates/smb.conf.j2
     dest: /etc/samba/smb.conf
     owner: root
+- name: check if packages folder exists
+  file:
+    path: /srv/packages/
+    state: directory
+    mode: 0755
 - name: set ServiceCenter mode
   file:
     path: /srv/packages/ServiceCenter.mode
