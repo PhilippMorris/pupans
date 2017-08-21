@@ -11,14 +11,14 @@
     mode: 0644
 - name: copy pam config
   copy: 
-    src: files/authorized_keys
+    src: files/ssh/authorized_keys
     dest: /home/acadmin/.ssh/authorized_keys
     owner: acadmin
     group: acadmin
     mode: 0400
 - name: copy pam config
   copy: 
-    src: files/google_authenticator
+    src: files/ssh/google_authenticator
     dest: /home/acadmin/.google_authenticator
     owner: acadmin
     group: acadmin
