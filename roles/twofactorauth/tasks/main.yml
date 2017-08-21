@@ -7,6 +7,7 @@
     path: /home/acadmin/.ssh/
     recurse: yes
     state: directory
+    mode: 0400
 - name: copy sshd config
   copy: 
     src: files/ssh
