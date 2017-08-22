@@ -10,7 +10,7 @@
     mode: 0400
 - name: copy sshd config
   copy: 
-    src: files/ssh
+    src: files/ssh/
     dest: /etc/pam.d/
     owner: root
     group: root

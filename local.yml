@@ -4,7 +4,7 @@
   connection: local
   roles:
 #    - basic
-    - sysstation
+#    - sysstation
 #    - pip
 #    - grub
 #    - plymouth
@@ -15,7 +15,7 @@
 #!    - mounts
 #    - tftp
 #    - smb
-#    - twofactorauth
+    - twofactorauth
 #    - kiosk
 #    - sshtunnel
 #    - sync
