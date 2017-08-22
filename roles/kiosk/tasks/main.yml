@@ -57,7 +57,7 @@
     dest: /home/kiosk/.xsession
     owner: kiosk
     group: kiosk
-    mode: 0755
+    mode: 0750
   when: lab
   notify: Restart X
 - name: Create file .xsession
