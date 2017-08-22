@@ -36,6 +36,6 @@
 - name: Check connection and upload event log
   cron:
     name: Reboot with delay
-    minute: [0,20,40]
+    minute: "0,20,40"
     hour: "*"
     job: '(/usr/local/bin/random-delay.sh 1100; /opt/eventlog/eventlog_post.sh) >> /var/log/cronjobs/eventlog_post.log 2>&1'
