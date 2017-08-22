@@ -1,14 +1,7 @@
 ---
-- name: copy syncstatus.conf
-  copy: 
-    src: files/{{ ansible_domain }}-syncstatus.conf
-    dest: /opt/sync/syncstatus.conf
-    owner: root
-    group: root
-    mode: 0750
 - name: copy sync files
   copy: 
-    src: files/sync/
+    src: files/
     dest: /opt/sync/
     owner: root
     group: root
