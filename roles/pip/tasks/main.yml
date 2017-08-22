@@ -9,6 +9,32 @@
 #  pip:
 #    name: pip
 #    state: latest
+- name: remove azure pip packages
+  pip:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - azure
+    - azure-mgmt
+    - azure-mgmt-authorization
+    - azure-mgmt-cdn
+    - azure-mgmt-compute
+    - azure-mgmt-dns
+    - azure-mgmt-logic
+    - azure-mgmt-graphrbac
+    - azure-mgmt-network
+    - azure-mgmt-notificationhubs
+    - azure-mgmt-redis
+    - azure-mgmt-resource
+    - azure-mgmt-scheduler
+    - azure-mgmt-storage
+    - azure-mgmt-web
+    - azure-mgmt-nspkg
+    - azure-graphrbac
+    - azure-servicebus
+    - azure-storage
+    - azure-common
+    - azure-nspkg
 - name: install pip packages
   pip:
     name: "{{ item }}"
@@ -36,29 +62,3 @@
     - six
     - untangle
     - azure-servicebus
-- name: remove azure pip package
-  pip:
-    name: "{{ item }}"
-    state: absent
-  with_items:
-    - azure
-    - azure-mgmt
-    - azure-mgmt-authorization
-    - azure-mgmt-cdn
-    - azure-mgmt-compute
-    - azure-mgmt-dns
-    - azure-mgmt-logic
-    - azure-mgmt-graphrbac
-    - azure-mgmt-network
-    - azure-mgmt-notificationhubs
-    - azure-mgmt-redis
-    - azure-mgmt-resource
-    - azure-mgmt-scheduler
-    - azure-mgmt-storage
-    - azure-mgmt-web
-    - azure-mgmt-nspkg
-    - azure-graphrbac
-#    - azure-servicebus
-    - azure-storage
-#    - azure-common
-#    - azure-nspkg
