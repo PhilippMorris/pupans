@@ -1,5 +1,4 @@
 ---
----
 - name: install netcat-openbsd
   apt: 
     name: netcat-openbsd 
