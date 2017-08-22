@@ -25,9 +25,5 @@ echo "Adding 127.0.1.1 $NEWHOSTNAME to /etc/hosts"
 /usr/local/bin/hosts.sh remove template
 /usr/local/bin/hosts.sh remove station.*
 
-if [ "$1" != "" ]; then
-	NEWDOMAIN=".$1"
-	/usr/local/bin/hosts.sh add "$NEWHOSTNAME$NEWDOMAIN $NEWHOSTNAME" 127.0.1.1
-else
-	/usr/local/bin/hosts.sh add $NEWHOSTNAME 127.0.1.1
-fi
+NEWDOMAIN=".ar.appchord.com"
+/usr/local/bin/hosts.sh add "$NEWHOSTNAME$NEWDOMAIN $NEWHOSTNAME" 127.0.1.1
