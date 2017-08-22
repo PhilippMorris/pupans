@@ -60,5 +60,5 @@
     - azure-graphrbac
 #    - azure-servicebus
     - azure-storage
-    - azure-common
-    - azure-nspkg
+#    - azure-common
+#    - azure-nspkg
