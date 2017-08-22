@@ -61,12 +61,12 @@
   when: lab
   notify: Restart X
 - name: Create file .xsession
-  copy: 
+  copy:
     src: files/_.xsession 
     dest: /home/kiosk/.xsession 
     owner: kiosk
     group: kiosk
-    mode: 0644
+    mode: 0755
   when: not lab
   notify: Restart X
 - name: Copy adb
