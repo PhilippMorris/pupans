@@ -35,12 +35,12 @@
     - sh
     - six
     - untangle
+    - azure-servicebus
 - name: remove azure pip package
   pip:
     name: "{{ item }}"
     state: absent
   with_items:
-    - azure-servicebus
     - azure
     - azure-mgmt
     - azure-mgmt-authorization
@@ -58,7 +58,7 @@
     - azure-mgmt-web
     - azure-mgmt-nspkg
     - azure-graphrbac
-    - azure-servicebus
+#    - azure-servicebus
     - azure-storage
     - azure-common
     - azure-nspkg

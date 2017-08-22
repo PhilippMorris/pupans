@@ -5,7 +5,7 @@
   roles:
 #    - basic
 #    - sysstation
-#    - pip
+    - pip
 #    - grub
 #    - plymouth
 #    - mtu-discover
@@ -19,7 +19,7 @@
 #    - kiosk
 #    - sshtunnel
 #    - sync
-    - eventlog
+#    - eventlog
 
 #multihomed\
 #multihomedstatic\
