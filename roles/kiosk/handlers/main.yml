@@ -1,6 +1,6 @@
 ---
 - name: Restart X
-  raw: pkill X
+  command: /usr/bin/pkill X
   ignore_errors: True
 - name: Kiosk Pull
   command: /opt/kiosk/kiosk_pull.sh {{branch}}
