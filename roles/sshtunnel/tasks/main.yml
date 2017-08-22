@@ -9,7 +9,7 @@
     dest: /etc/init/sshtunnel.conf
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
   notify:
   - Restart SSH tunnel
 - name: copy needed files
