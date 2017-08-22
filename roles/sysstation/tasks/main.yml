@@ -39,7 +39,7 @@
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
   with_items:
     - { src: 'files/sysstation/', dest: '/opt/connection-status/' }
     - { src: 'files/opt/', dest: '/opt/' }
