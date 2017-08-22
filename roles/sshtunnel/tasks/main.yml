@@ -14,8 +14,8 @@
   - Restart SSH tunnel
 - name: copy needed files
   copy: 
-    src: 'files/sshtunnel/'
-    dest: '/opt/sshtunnel/'
+    src: "files/sshtunnel/"
+    dest: "/opt/sshtunnel/"
     owner: root
     group: root
     mode: 755

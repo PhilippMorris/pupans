@@ -16,8 +16,8 @@
 #    - tftp
 #    - smb
 #    - twofactorauth
-    - kiosk
-#    - sshtunnel
+#    - kiosk
+    - sshtunnel
 #    - sync
 
 #multihomed\
