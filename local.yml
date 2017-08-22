@@ -17,8 +17,8 @@
 #    - smb
 #    - twofactorauth
 #    - kiosk
-    - sshtunnel
-#    - sync
+#    - sshtunnel
+    - sync
 
 #multihomed\
 #multihomedstatic\
