@@ -19,7 +19,7 @@
 #    - kiosk
 #    - sshtunnel
 #    - sync
-     - eventlog
+    - eventlog
 
 #multihomed\
 #multihomedstatic\
