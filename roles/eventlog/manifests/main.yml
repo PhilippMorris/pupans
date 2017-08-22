@@ -1,0 +1,42 @@
+---
+---
+- name: install netcat-openbsd
+  apt: 
+    name: netcat-openbsd 
+    state: latest
+- name: ensure directories exist
+  file:
+    path: /opt/eventlog
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+- name: ensure file exists
+  file:
+    path: /opt/eventlog/testconnection.ignorentp
+    state: touch
+    owner: root
+    group: root
+    mode: 0755
+- name: copy eventlog files
+  copy: 
+    src: files/ 
+    dest: /opt/eventlog/
+    owner: root
+    group: root
+    mode: 0755
+- name: copy eventlog files
+  file: 
+    src: /opt/eventlog/eventlog_post.sh
+    dest: /etc/rc3.d/S80connection-test
+    owner: root
+    group: root
+    mode: 0744
+    state: link
+    force: yes
+- name: Check connection and upload event log
+  cron:
+    name: Reboot with delay
+    minute: 0, 20, 40
+    hour: "*"
+    job: '(/usr/local/bin/random-delay.sh 1100; /opt/eventlog/eventlog_post.sh) >> /var/log/cronjobs/eventlog_post.log 2>&1'

@@ -15,10 +15,11 @@
 #!    - mounts
 #    - tftp
 #    - smb
-    - twofactorauth
+#    - twofactorauth
 #    - kiosk
 #    - sshtunnel
 #    - sync
+     - eventlog
 
 #multihomed\
 #multihomedstatic\
