@@ -27,18 +27,18 @@
     minute: 0
     hour: 7
     weekday: 0
-    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder 'https://seeder.basechord.com' --speed 'high' --seederuser --branch {{branch}} --seederpassword) >> /var/log/cronjobs/sync.log 2>&1"
+    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder {{ seeder }} --speed {{ speed }} --seederuser {{ seederuser }} --branch {{branch}} --seederpassword {{seederpassword}}) >> /var/log/cronjobs/sync.log 2>&1"
 - cron:
     name: Sync packages nighttime
     minute: 0
     hour: 22
-    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder 'https://seeder.basechord.com' --speed 'high' --seederuser --branch {{branch}} --seederpassword) >> /var/log/cronjobs/sync.log 2>&1"
+    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder {{ seeder }} --speed {{ speed }} --seederuser {{ seederuser }} --branch {{branch}} --seederpassword {{seederpassword}}) >> /var/log/cronjobs/sync.log 2>&1"
 - cron:
     name: Sync packages daytime
     minute: 0
     hour: 7
     weekday: 1-6
-    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder 'https://seeder.basechord.com' --speed 'low' --seederuser --branch {{branch}} --seederpassword) >> /var/log/cronjobs/sync.log 2>&1"
+    job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder {{ seeder }} --speed {{ speed }} --seederuser {{ seederuser }} --branch {{branch}} --seederpassword {{seederpassword}}) >> /var/log/cronjobs/sync.log 2>&1"
 - cron:
     name: Sync status
     minute: 0
