@@ -3,6 +3,10 @@
   apt: 
     name: autossh 
     state: latest
+- name: ensure sshtunnel directory exists
+  file:
+    path: /opt/sshtunnel/
+    state: directory
 - name: copy sshtunnel.conf
   copy: 
     src: files/sshtunnel.conf
