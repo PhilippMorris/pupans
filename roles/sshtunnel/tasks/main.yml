@@ -18,7 +18,7 @@
   - Restart SSH tunnel
 - name: copy sshtunnel.conf
   copy: 
-    src: files/sshtunnel/sshr_id_rsa
+    src: files/sshr_id_rsa
     dest: /opt/sshtunnel/sshr_id_rsa
     owner: root
     group: root
@@ -36,7 +36,7 @@
     owner: root
     group: root
     mode: 0666
-    state: touch
+    state: file
 - name: 
   file:
     path: /etc/sshtunnel
