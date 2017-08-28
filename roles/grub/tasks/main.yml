@@ -55,6 +55,14 @@
     group: root
     mode: 0755
   notify: update grub
+- name: Copy grub config for ssh tunnel
+  copy: 
+    src: files/41_custom
+    dest: /etc/grub.d/41_custom
+    owner: root
+    group: root
+    mode: 0755
+  notify: update grub
 - name: set default "Kiosk mode"
   command: grub-set-default "Kiosk mode"
   notify: update grub
