@@ -6,7 +6,7 @@
 #    - basic
 #    - sysstation
 #    - pip
-    - grub
+#    - grub
 #    - plymouth
 #    - mtu-discover
 #    - iptables
