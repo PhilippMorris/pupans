@@ -18,5 +18,5 @@
 #    - twofactorauth
 #    - kiosk
 #    - sshtunnel
-    - sync
-#    - eventlog
+#    - sync
+    - eventlog
