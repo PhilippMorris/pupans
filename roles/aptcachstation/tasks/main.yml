@@ -9,7 +9,8 @@
 - name: run detectproxy script
   command: "/usr/bin/python /opt/detectproxy.py seeder.basechord.com 5001"
 - name: add cron job Detect Apt Proxy
-  cron: Detect Apt Proxy
+  cron:
+    name: Detect Apt Proxy
     month: "*"
     weekday: "*"
     hour: "*"
