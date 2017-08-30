@@ -7,11 +7,11 @@
     group: root
     mode: 0644
 - name: run detectproxy script
-  command: /usr/bin/python /opt/detectproxy.py seeder.basechord.com 5001
+  command: "/usr/bin/python /opt/detectproxy.py seeder.basechord.com 5001"
 - name: add cron job Detect Apt Proxy
   cron: Detect Apt Proxy
-  month: "*"
-  day: "*"
-  hour: "*"
-  minute: "15"
-  job: /usr/bin/python /opt/detectproxy.py seeder.basechord.com 5001
+    month: "*"
+    day: "*"
+    hour: "*"
+    minute: "15"
+    job: /usr/bin/python /opt/detectproxy.py seeder.basechord.com 5001

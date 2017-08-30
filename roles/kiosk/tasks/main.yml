@@ -101,16 +101,19 @@
   with_items:
     - { src: 'files/bridge/', dest: '/var/www/bridge/' }
     - { src: 'files/kiosk/', dest: '/opt/kiosk/' }
-- cron:
+- name: add cronjob Restart Chromium At Midnight
+  cron:
     name: Restart Chromium At Midnight
     minute: 0
     hour: 0
     job: /usr/bin/killall chrome >> /var/log/cronjobs/restart_chromium.log 2>&1
-- cron:
+- name: add cronjob Pull Kiosk
+  cron:
     name: Pull Kiosk
     hour: "*/2"
     job: /opt/kiosk/kiosk_pull.sh {{branch}}
-- cron:
+- name: add cronjob Pull Kiosk at boot
+  cron:
     name: Pull Kiosk at boot
     reboot: yes
     job: /opt/kiosk/kiosk_pull.sh {{branch}}

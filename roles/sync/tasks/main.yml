@@ -22,24 +22,28 @@
     dest: /usr/share/p2pclient/torrents/storage_stations.xml
     state: link
     force: yes
-- cron:
+- name: add cronjob Sync packages Sunday
+  cron:
     name: Sync packages Sunday
     minute: 0
     hour: 7
     weekday: 0
     job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder {{ seeder }} --speed {{ speed }} --seederuser {{ seederuser }} --branch {{branch}} --seederpassword {{seederpassword}}) >> /var/log/cronjobs/sync.log 2>&1"
-- cron:
+- name: add cronjob Sync packages nighttime
+  cron:
     name: Sync packages nighttime
     minute: 0
     hour: 22
     job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder {{ seeder }} --speed {{ speed }} --seederuser {{ seederuser }} --branch {{branch}} --seederpassword {{seederpassword}}) >> /var/log/cronjobs/sync.log 2>&1"
-- cron:
+- name: add cronjob Sync packages daytime
+  cron:
     name: Sync packages daytime
     minute: 0
     hour: 7
     weekday: 1-6
     job: "(/usr/local/bin/random-delay.sh 300; /opt/sync/syncrestart.py --seeder {{ seeder }} --speed {{ speed }} --seederuser {{ seederuser }} --branch {{branch}} --seederpassword {{seederpassword}}) >> /var/log/cronjobs/sync.log 2>&1"
-- cron:
+- name: add cronjob Sync status
+  cron:
     name: Sync status
     minute: 0
     hour: 8
