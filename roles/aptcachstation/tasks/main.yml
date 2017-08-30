@@ -11,7 +11,7 @@
 - name: add cron job Detect Apt Proxy
   cron: Detect Apt Proxy
     month: "*"
-    day: "*"
+    weekday: "*"
     hour: "*"
     minute: "15"
     job: /usr/bin/python /opt/detectproxy.py seeder.basechord.com 5001
