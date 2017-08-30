@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    connection_results = {('api.ar.appchord', 443): '?', ('www.google.com', 80): '?', ('tunnel.basechord.com', 22): '?'}
+    connection_results = {('api.ar.appchord.com', 443): '?', ('www.google.com', 80): '?', ('tunnel.basechord.com', 22): '?'}
 
     for key in connection_results.keys():
         result = sh.nc('-z', '-w3', key[0], key[1], _ok_code=(0,1))
