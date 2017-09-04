@@ -1,6 +1,6 @@
 ---
 - apt_repository:
-    repo: 'ppa:fkrull/deadsnakes-python2.7'
+    repo: 'ppa:fkrull/deadsnakes'
 - name: Update repositories cache and install python 2.7.12
   apt:
     name: python2.7
