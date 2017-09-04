@@ -6,7 +6,7 @@
     name: python2.7
     update_cache: yes
 - name: install python pip
-  pip:
+  easy_install:
     name: pip
     state: latest
 - name: remove azure pip packages
