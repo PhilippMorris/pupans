@@ -1,5 +1,27 @@
 ﻿rm -rf /var/lib/apt/lists/*
-apt-get install software-properties-common
-apt-add-repository ppa:ansible/ansible -y
-apt-get update
-apt-get install ansible -y && apt-get install git -y
+apt-get update;apt-get install openssh-server -y;apt-get install software-properties-common -y;apt-get install python-software-properties -y;apt-add-repository ppa:ansible/ansible -y
+apt-get update;apt-get install ansible -y;apt-get install git -y
+python name.py
+
+
+/etc/puppet/hieradata/ar.appchord.com/station00262d876457.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd12e95c.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd29dcbc.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd29dcd7.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd29e317.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd2dd4ff.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd2dd931.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd32910e.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd32b260.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd32b27e.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd32bb56.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd331e80.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station2c44fd332ad4.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station6c0b84419484.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station7446a09a9734.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station7446a09dac17.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station7446a09dac51.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/station989096b00acc.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/stationa0b3ccee881c.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/stationf0921ce4c05b.yaml:smb::config::ensure_servicecenter_mode_file: present
+/etc/puppet/hieradata/ar.appchord.com/stationf0921ce4c2ac.yaml:smb::config::ensure_servicecenter_mode_file: present

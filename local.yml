@@ -3,21 +3,21 @@
 - hosts: 127.0.0.1
   connection: local
   roles:
-#    - basic
-#    - sysstation
-#    - pip
-#    - grub
-#    - plymouth
-#    - mtu-discover
-#    - iptables
-#    - ntp
-#    - dhcp
+    - basic
+    - sysstation
+    - pip
+    - grub
+    - plymouth
+    - mtu-discover
+    - iptables
+    - ntp
+    - dhcp
 #!    - mounts
-#    - tftp
-#    - smb
-#    - twofactorauth
-#    - kiosk
-#    - sshtunnel
-#    - sync
+    - tftp
+    - smb
+    - twofactorauth
+    - kiosk
+    - sshtunnel
+    - sync
     - eventlog
     - aptcachstation

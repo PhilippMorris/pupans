@@ -12,5 +12,8 @@
     owner: root
     group: root
     mode: 0755
-- name: run script to create iptables rules
-  script: /etc/iptables/iptables-rules.sh
+#- name: run script to create iptables rules
+#  script: /etc/iptables/iptables-rules.sh
+- name: disable UFW
+  ufw:
+    state: disabled
