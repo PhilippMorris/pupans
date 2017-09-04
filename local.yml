@@ -12,7 +12,7 @@
     - iptables
     - ntp
     - dhcp
-#!    - mounts
+#!    - mounts + grub uncomment
     - tftp
     - smb
     - twofactorauth

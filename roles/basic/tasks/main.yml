@@ -1,31 +1,31 @@
 ---
-- apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 630239CC130E1A7FD81A27B140976EAF437D05B5
-    state: present
-- shell: ls -1 /etc/apt/sources.list.d/
-  register: contents
-- file: path=/etc/apt/sources.list.d/{{ item }} state=absent
-  with_items: contents.stdout_lines
-  when: item not in managed_files
-- name: remove sources
-  file:
-    path: /etc/apt/sources.list
-    state: absent
-- name: create empty sources file
-  file:
-    path: /etc/apt/sources.list
-    state: touch
-    mode: 0755
-- name: set repos
-  apt_repository:
-    repo: "{{ item }}"
-    state: present
-  with_items:
-   - deb http://us.archive.ubuntu.com/ubuntu/ precise main restricted universe multiverse
-   - deb http://us.archive.ubuntu.com/ubuntu/ precise-security main restricted universe multiverse
-   - deb http://us.archive.ubuntu.com/ubuntu/ precise-updates main restricted universe multiverse
-   - deb http://us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse
+#- apt_key:
+#    keyserver: keyserver.ubuntu.com
+#    id: 630239CC130E1A7FD81A27B140976EAF437D05B5
+#    state: present
+#- shell: ls -1 /etc/apt/sources.list.d/
+#  register: contents
+#- file: path=/etc/apt/sources.list.d/{{ item }} state=absent
+#  with_items: contents.stdout_lines
+#  when: item not in managed_files
+#- name: remove sources
+#  file:
+#    path: /etc/apt/sources.list
+#    state: absent
+#- name: create empty sources file
+#  file:
+#    path: /etc/apt/sources.list
+#    state: touch
+#    mode: 0755
+#- name: set repos
+#  apt_repository:
+#    repo: "{{ item }}"
+#    state: present
+#  with_items:
+#   - deb http://us.archive.ubuntu.com/ubuntu/ precise main restricted universe multiverse
+#   - deb http://us.archive.ubuntu.com/ubuntu/ precise-security main restricted universe multiverse
+#   - deb http://us.archive.ubuntu.com/ubuntu/ precise-updates main restricted universe multiverse
+#   - deb http://us.archive.ubuntu.com/ubuntu/ precise-backports main restricted universe multiverse
 - name: Install basic software
   apt: 
     name: "{{ item }}" 
