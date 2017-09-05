@@ -90,6 +90,7 @@
     - { src: 'files/chromium_policies/default.json', dest: '/etc/chromium/policies/managed/default.json' }
     - { src: 'files/kiosk.conf', dest: '/etc/init/kiosk.conf' }
     - { src: 'files/nodm', dest: '/etc/default/nodm' }
+    - { src: 'files/rswatcher.conf', dest: '/etc/init/rswatcher.conf' }
   notify: Kiosk Pull
 - name: copy bridge and kiosk files
   copy: 
@@ -101,6 +102,7 @@
   with_items:
     - { src: 'files/bridge/', dest: '/var/www/bridge/' }
     - { src: 'files/kiosk/', dest: '/opt/kiosk/' }
+    - { src: 'files/rswatcher/', dest: '/opt/rswatcher/' }
 - name: add cronjob Restart Chromium At Midnight
   cron:
     name: Restart Chromium At Midnight
@@ -125,3 +127,7 @@
     name: kiosk
     enabled: yes
     state: started
+- service:
+    name: rswatcher
+    enabled: no
+    state: stopped

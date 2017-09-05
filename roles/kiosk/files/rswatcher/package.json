@@ -1,0 +1,13 @@
+{
+  "name": "RSwatcher",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node rswatcher.js"
+  },
+  "dependencies": {
+    "request": "^2.81.0",
+    "socket.io-client": "^1.7.3",
+    "yamljs": "^0.2.9"
+  }
+}
