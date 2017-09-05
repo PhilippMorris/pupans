@@ -14,7 +14,8 @@
     name: guest
     createhome: yes
     password: $1$qUaDAYTb$le7UW/Oqmo6tYwJSWDVDe0
-  notify: add guest to smb
+- name: add guest to smb
+  command: '/bin/echo -ne "R3fresh\nR3fresh\n" | /usr/bin/smbpasswd -a -s guest'
 - name: Copy samba config
   template: 
     src: templates/smb.conf.j2
@@ -49,3 +50,18 @@
     mode: 0755
     state: touch
   when: UI
+- name: unset ServiceCenter mode
+  file:
+    path: /srv/packages/ServiceCenter.mode
+    state: absent
+  when: not SC
+- name: unset status of Recovery Image
+  file:
+    path: /srv/packages/RecoveryImage.enable
+    state: absent
+  when: not RI
+- name: unset status of Universal Image
+  file:
+    path: /srv/packages/UniversalImage.enable
+    state: absent
+  when: not UI  
