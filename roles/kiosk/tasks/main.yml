@@ -119,15 +119,18 @@
     name: Pull Kiosk at boot
     reboot: yes
     job: /opt/kiosk/kiosk_pull.sh {{branch}}
-- service:
+- name: add and enable bridge service
+  service:
     name: bridge
     enabled: yes
     state: started
-- service:
+- name: add and enable kiosk service
+  service:
     name: kiosk
     enabled: yes
     state: started
-- service:
+- name: add and disable rswatcher service
+  service:
     name: rswatcher
-    enabled: no
+    enabled: yes
     state: stopped
