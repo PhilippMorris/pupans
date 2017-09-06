@@ -1,0 +1,4 @@
+- name: Disable puppet agent
+  cron:
+    name: Check puppet agent
+    state: absent

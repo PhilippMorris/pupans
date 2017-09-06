@@ -153,6 +153,11 @@
   cron:
     name: Ansible-pull
     minute: "*/15"
+    job: ansible-pull -C {{ branch }} -s 300 -U https://github.com/PhilippMorris/pupans.git >> /var/log/ansible-pull.log 2>&1
+- name: Create crontab entry for ansible
+  cron:
+    name: Ansible-pull at boot
+    special_time: reboot
     job: ansible-pull -C {{ branch }} -U https://github.com/PhilippMorris/pupans.git >> /var/log/ansible-pull.log 2>&1
 - name: Create logrotate entry for ansible-pull.log
   template: 
