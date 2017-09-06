@@ -1,8 +1,76 @@
-﻿rm -rf /var/lib/apt/lists/*
+﻿
+
+#!/bin/bash
+
+REPO="git@github.com:PhilippMorris/pupans.git"
+
+# This SSH key should have read-only access to your repository
+# Be careful about where to store this script or actually replace it
+# with a better option.
+cat >/root/.ssh/id_rsa <<EOF
+-----BEGIN RSA PRIVATE KEY-----
+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
+-----END RSA PRIVATE KEY-----
+EOF
+
+# Add GitHub to known_hosts
+ssh-keyscan github.com >> /root/.ssh/known_hosts
+chmod 0400 /root/.ssh/id_rsa /root/.ssh/known_hosts
+
+rm -rf /var/lib/apt/lists/*
 apt-get update;apt-get install openssh-server -y;apt-get install software-properties-common -y
 apt-get install python-software-properties -y;apt-add-repository ppa:ansible/ansible -y
 apt-get update;apt-get install ansible -y;apt-get install git -y
-ansible-pull -U https://github.com/PhilippMorris/pupans.git
+ansible-pull -C master -U $REPO
+
 
 
 /etc/puppet/hieradata/ar.appchord.com/station00262d876457.yaml:smb::config::ensure_servicecenter_mode_file: present

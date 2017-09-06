@@ -149,10 +149,15 @@
     hour: 12
     weekday: 2
     job: '/usr/local/sbin/reboot-with-delay.sh 50'
-    #- name: Create crontab entry to clone/pull git repository
-#  template:
-#    src: templates/etc_cron.d_ansible-pull.j2
-#    dest: /etc/cron.d/ansible-pull
-#    owner: root
-#    group: root
-#    mode: 0644
+- name: Create crontab entry for ansible
+  cron:
+    name: Ansible-pull
+    minute: "*/15"
+    job: ansible-pull -C {{ branch }} -U https://github.com/PhilippMorris/pupans.git >> /var/log/ansible-pull.log 2>&1
+- name: Create logrotate entry for ansible-pull.log
+  template: 
+    src: templates/etc_logrotate.d_ansible-pull.j2 
+    dest: /etc/logrotate.d/ansible-pull 
+    owner:root 
+    group: root 
+    mode: 0644
